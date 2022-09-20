@@ -27,18 +27,21 @@ const pokemon = async (name) => {
 }
 
 const dataPoke = async (e, data) => {
-    const name = e.target.parentNode.textContent;
-
+    const name = e.target.name;
     const results = await pokemon(name);
 
+    //crear elementos de loading
     const messagecontent = document.createElement('div')
     const loading = document.createElement('span')
 
+    //darle clases a los elementos
     messagecontent.classList.add("messagecontent");
     loading.classList.add('loading')
 
+    //valores a los elementos
     loading.innerHTML = 'loading...'
 
+    //agregar los elementos
     messagecontent.appendChild(loading)
     App.appendChild(messagecontent)
 
@@ -46,9 +49,9 @@ const dataPoke = async (e, data) => {
         App.removeChild(messagecontent)
         App.removeChild(divContent)
         App.removeChild(Tittle)
+        aboutPoke(results)
     }, 2000);
 
-    return results
 }
 
 const AllPokemons = async () => {
@@ -61,6 +64,7 @@ const AllPokemons = async () => {
         const enlacePoke = document.createElement('h2')
         const divImage = document.createElement('div')
         const imgPoke = document.createElement('img')
+        const buttonPoke = document.createElement('button')
 
         //añadir clases
         divImage.classList.add('divImagePoke')
@@ -68,25 +72,71 @@ const AllPokemons = async () => {
         enlacePoke.classList.add('enlacePoke')
         divContentPoke.classList.add('divContentPoke')
         imgPoke.classList.add('imgPoke')
+        buttonPoke.classList.add('buttonPoke')
 
         //dar valores necesarios
         enlacePoke.innerHTML = results[i].name
         imgPoke.src = sprites.back_default
+        buttonPoke.innerHTML = 'About Pokemon'
+        buttonPoke.name = results[i].name
 
         //agregar los elementos al div App
         divImage.appendChild(imgPoke)
         divContentPoke.appendChild(enlacePoke)
         divContentPoke.append(divImage)
+        divContentPoke.append(buttonPoke)
         divContent.appendChild(divContentPoke)
         App.appendChild(divContent)
 
-        enlacePoke.addEventListener('click', async (e) => {
-            dataPoke(e, {divContent})
+        buttonPoke.addEventListener('click', async (e) => {
+            dataPoke(e, { divContent })
         })
     }
 }
 
+const aboutPoke = (results) => {
+    console.log(results);
+    const { name, sprites, abilities } = results;
 
+    //creacion de los elementos 
+    const about = document.createElement('div')
+    const aboutName = document.createElement('h1')
+    const aboutcontent = document.createElement('div')
+    const aboutImgContent = document.createElement('div')
+    const aboutImg = document.createElement('img')
+    const aboutAbilities = document.createElement('ul')
+
+    for (let i = 0; i < abilities.length; i++) {
+        const {ability} = abilities[i]
+
+        const aboutAbilitie = document.createElement('li')
+        aboutAbilitie.classList.add('aboutAbilitie')
+
+        aboutAbilitie.innerHTML = ability.name
+
+        aboutAbilities.appendChild(aboutAbilitie)
+    }
+
+
+    //clases alos elementos 
+    about.classList.add('about')
+    aboutName.classList.add('aboutName')
+    aboutcontent.classList.add('aboutcontent')
+    aboutImgContent.classList.add('aboutImgContent')
+    aboutImg.classList.add('aboutImg')
+
+    //valores alos elementos
+    aboutName.innerHTML = name
+    aboutImg.src = sprites.back_default
+
+    //agregar elementos a App
+    aboutImgContent.appendChild(aboutImg)
+    aboutcontent.appendChild(aboutImgContent)
+    aboutcontent.appendChild(aboutAbilities)
+    about.appendChild(aboutName)
+    about.appendChild(aboutcontent)
+    App.appendChild(about)
+}
 
 
 AllPokemons()
