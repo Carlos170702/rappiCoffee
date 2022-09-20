@@ -13,44 +13,57 @@
 body {
     height: 100vh;
     width: 100%;
+    background-color: rgb(120, 186, 108);
 }
 
 .App {
-    background-color: rgb(255, 172, 172);
     width: 100%;
-    height: 100%;
     padding: 10px;
     position: relative;
 }
 
-.App div {
+.divContent {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 10px;
+    column-gap: 50px;
+    row-gap: 20px;
 }
 
-.App div div {
+.divContentPoke {
     width: 100px;
-    background-color: rgb(212, 175, 247);
-    height: 50px;
+    background-color: rgb(175, 247, 204);
     border-radius: 20px;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
-.App h2 {
-    color: green;
+.divContentPoke:hover{
+    animation: scale 1s alternate ;
+}
+
+@keyframes scale {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.2);
+    }
+}
+
+.Tittle {
+    color: rgb(67, 61, 237);
     display: block;
     text-align: center;
-    margin-bottom: 15px;
+    margin: 5px 0 15px 0;
     font-family: var(--principal);
 }
 
-.App div h2 {
-    color: white;
+.enlacePoke{
+    color: rgb(149, 178, 240);
     font-size: 15px;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     text-decoration: none;
@@ -62,27 +75,19 @@ body {
     cursor: pointer;
 }
 
-@keyframes scale {
-    0% {
-        transform: scale(1);
-    }
-
-    100% {
-        transform: scale(1.2);
-    }
-}
-
 .messagecontent {
-    position: absolute;
+    position: fixed;
     top: 0;
-    bottom: 0;
-    right: 0;
     left: 0;
+    width: 100%;
+    height: 100%;
     background-color: rgba(0, 0, 0, .8);
-
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-span{
+.loading{
     background-color: black;
     width: 100px;
     height: 100px;
@@ -95,3 +100,15 @@ span{
     color: white;
     font-family: var(--principal);
 }
+.divImagePoke{
+    width: 80px;
+    min-height: 80px;
+    margin-bottom: 10px;
+}
+
+.imgPoke{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
