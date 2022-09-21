@@ -50,6 +50,7 @@ const dataPoke = async (e, data) => {
         App.removeChild(divContent)
         App.removeChild(Tittle)
         aboutPoke(results)
+        
     }, 2000);
 
 }
